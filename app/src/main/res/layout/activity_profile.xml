@@ -22,6 +22,7 @@
             android:background="@drawable/circle_border">
 
             <ImageView
+                android:id="@+id/ivAvatar"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_margin="9dp"
@@ -34,7 +35,7 @@
         </RelativeLayout>
 
         <TextView
-            android:id="@+id/tv_name"
+            android:id="@+id/tvProfileName"
             style="@style/TextViewLager"
             android:layout_below="@+id/imgUser"
             android:layout_centerHorizontal="true"
@@ -45,7 +46,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/layout_image">
@@ -72,7 +73,8 @@
                     android:textColor="@color/colorPrimaryLight" />
 
                 <TextView
-                    style="@style/TextViewMedium"
+                    android:id="@+id/tvUserName"
+                    style="@style/TextViewDefault"
                     android:textAllCaps="true"
                     android:text="NGUYỄN QUANG HƯNG" />
 
@@ -96,7 +98,8 @@
                     android:textColor="@color/colorPrimaryLight" />
 
                 <TextView
-                    style="@style/TextViewMedium"
+                    android:id="@+id/tvUserPhone"
+                    style="@style/TextViewDefault"
                     android:text="0352429696" />
 
                 <View
@@ -119,7 +122,8 @@
                     android:textColor="@color/colorPrimaryLight" />
 
                 <TextView
-                    style="@style/TextViewMedium"
+                    android:id="@+id/tvUserAddress"
+                    style="@style/TextViewDefault"
                     android:textAllCaps="true"
                     android:text="275 NGUYỄN TRÃI, THANH XUÂN, HÀ NỘI" />
 
@@ -141,12 +145,14 @@
         android:orientation="horizontal"
         android:layout_alignParentBottom="true">
         <Button
+            android:id="@+id/btnChangePassword"
             style="@style/ButtonRed"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:text="ĐỔI MẬT KHẨU"
             android:layout_margin="20dp"/>
         <Button
+            android:id="@+id/btnChangeProfile"
             style="@style/ButtonRed"
             android:layout_width="0dp"
             android:layout_weight="1"
