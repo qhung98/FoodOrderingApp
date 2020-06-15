@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfileActivity">
+
+    <RelativeLayout
+        android:id="@+id/layout_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_gradient"
+        android:paddingBottom="20dp">
+
+        <RelativeLayout
+            android:id="@+id/imgUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/circle_border">
+
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_margin="9dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/circle"
+                android:padding="3dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_avatar" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_name"
+            style="@style/TextViewLager"
+            android:layout_below="@+id/imgUser"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15sp"
+            android:text="Nguyen Quang Hung"
+            android:textColor="@color/white" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_image">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/TextViewDefault"
+                    android:text="HỌ TÊN"
+                    android:textColor="@color/colorPrimaryLight" />
+
+                <TextView
+                    style="@style/TextViewMedium"
+                    android:textAllCaps="true"
+                    android:text="NGUYỄN QUANG HƯNG" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="15dp"
+                    android:background="#FFE5E5E5" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/TextViewDefault"
+                    android:text="SỐ ĐIỆN THOẠI"
+                    android:textColor="@color/colorPrimaryLight" />
+
+                <TextView
+                    style="@style/TextViewMedium"
+                    android:text="0352429696" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="15dp"
+                    android:background="#FFE5E5E5" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/TextViewDefault"
+                    android:text="ĐỊA CHỈ"
+                    android:textColor="@color/colorPrimaryLight" />
+
+                <TextView
+                    style="@style/TextViewMedium"
+                    android:textAllCaps="true"
+                    android:text="275 NGUYỄN TRÃI, THANH XUÂN, HÀ NỘI" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="15dp"
+                    android:background="#FFE5E5E5" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true">
+        <Button
+            style="@style/ButtonRed"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="ĐỔI MẬT KHẨU"
+            android:layout_margin="20dp"/>
+        <Button
+            style="@style/ButtonRed"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="Sửa thông tin"
+            android:layout_margin="20dp"/>
+    </LinearLayout>
+
+</RelativeLayout>

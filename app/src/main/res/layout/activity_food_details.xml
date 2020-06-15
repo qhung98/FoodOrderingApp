@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FoodDetailsActivity">
+
+
+<!--    <ImageView-->
+<!--        android:id="@+id/ivDetailFoodImage"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="260dp"-->
+<!--        app:srcCompat="@drawable/combo" />-->
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardDescription"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        app:cardCornerRadius="5dp"
+        android:elevation="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_marginTop="5dp"
+                android:id="@+id/ivDetailFoodImage"
+                android:layout_width="match_parent"
+                android:layout_height="260dp"
+                app:srcCompat="@drawable/combo" />
+
+            <TextView
+                android:id="@+id/tvDetailFoodName"
+                style="@style/TextViewMedium"
+                android:layout_width="match_parent"
+                android:layout_margin="5dp"
+                android:gravity="center_horizontal"
+                android:text="COMBO GÀ RÁN A"
+                android:textAllCaps="true"
+                android:textStyle="bold" />
+
+            <TextView
+                style="@style/TextViewMedium"
+                android:layout_width="match_parent"
+                android:textStyle="bold"
+                android:text="Mô tả"
+                android:paddingLeft="10dp"
+                android:layout_marginLeft="5dp"/>
+
+d
+            <TextView
+                android:id="@+id/tvDescription"
+                style="@style/TextViewDefault"
+                android:layout_width="match_parent"
+                android:textColor="#ff707070"
+                android:padding="5dp"
+                android:layout_marginLeft="5dp"
+                android:text="&#8226; 1 Pepsi lon \n&#8226; 4 Miếng Gà \n&#8226; 1 Khoai tây chiên"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+
+                <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
+                    android:id="@+id/btnDetailCount"
+                    android:layout_width="80dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerInParent="true"
+                    app:textSize="6dp"
+                    app:backGroundColor="#ED000000"
+                    app:initialNumber="1"
+                    app:finalNumber="99" />
+
+                <TextView
+                    android:id="@+id/tvDetailPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_alignParentEnd="true"
+                    style="@style/TextViewDefault"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:text="42.000đ"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+
+    <Button
+        android:id="@+id/btnDetailOrder"
+        style="@style/ButtonRed"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="Đặt hàng"
+        android:textStyle="bold" />
+
+</RelativeLayout>

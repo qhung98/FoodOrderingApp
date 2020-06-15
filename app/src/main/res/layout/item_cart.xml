@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    android:id="@+id/itemOrder"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="5dp"
+    android:layout_marginBottom="15dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_layout_cart_item"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:id="@+id/tvCartFoodName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginEnd="20dp"
+                android:layout_toStartOf="@id/ivCartRemove"
+                style="@style/TextViewMedium"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:text="Combo gia dinh A"/>
+
+            <ImageView
+                android:id="@+id/ivCartRemove"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:background="?selectableItemBackgroundBorderless"
+                android:padding="5dp"
+                app:srcCompat="@drawable/ic_close" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvFoodPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextViewDefault"
+            android:text="120.000đ"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="#ffc5c5c5" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:paddingBottom="10dp">
+
+            <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
+                android:id="@+id/btnCartCount"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerInParent="true"
+                app:textSize="6dp"
+                app:backGroundColor="#ED000000"
+                app:initialNumber="1"
+                app:finalNumber="99"/>
+
+            <TextView
+                android:id="@+id/tvCartPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_alignParentEnd="true"
+                style="@style/TextViewDefault"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:text="300.000đ"/>
+
+        </RelativeLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            app:srcCompat="@drawable/kfc_logo" />
+
+        <TextView
+            android:id="@+id/tvSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imageView1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:text="Đăng ký"
+            android:textColor="#000000"
+            android:textSize="40dp"
+            app:fontFamily="@font/nabila" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvSignUp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="20dp"
+            android:orientation="vertical">
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/edRegisterPhone"
+                style="@style/EditText"
+                android:drawableLeft="@drawable/ic_phone"
+                android:hint="Số điện thoại"
+                android:inputType="textPhonetic" />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/edRegisterPassword"
+                style="@style/EditText"
+                android:layout_marginTop="20dp"
+                android:drawableLeft="@drawable/ic_lock"
+                android:hint="Mật khẩu"
+                android:inputType="textPassword" />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/edRegisterConfirmPassword"
+                style="@style/EditText"
+                android:layout_marginTop="20dp"
+                android:drawableLeft="@drawable/ic_lock_outline"
+                android:hint="Nhập lại mật khẩu"
+                android:inputType="textPassword" />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/edPersonName"
+                style="@style/EditText"
+                android:layout_marginTop="20dp"
+                android:drawableLeft="@drawable/ic_person"
+                android:hint="Họ tên"
+                android:inputType="textPersonName" />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/edRegisterAddress"
+                style="@style/EditText"
+                android:layout_marginTop="20dp"
+                android:drawableLeft="@drawable/ic_location"
+                android:hint="Địa chỉ"
+                android:inputType="text" />
+
+            <Button
+                android:id="@+id/btnRegisterForm"
+                android:text="Đăng ký"
+                style="@style/ButtonRed"
+                android:layout_marginTop="25dp" />
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>
