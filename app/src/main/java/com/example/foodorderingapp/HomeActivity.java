@@ -121,7 +121,7 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
                 startActivity(new Intent(HomeActivity.this, CartActivity.class));
                 break;
             case R.id.nav_logout:
-                Toast.makeText(getBaseContext(), "Nav_Logout", Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), "LogOut", Toast.LENGTH_LONG).show();
                 break;
         }
 
