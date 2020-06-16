@@ -115,7 +115,6 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.nav_info:
-                Toast.makeText(getBaseContext(), "Nav_Info", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getBaseContext(), ProfileActivity.class));
                 break;
             case R.id.nav_cart:
@@ -123,7 +122,6 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
                 break;
             case R.id.nav_logout:
                 Toast.makeText(getBaseContext(), "Nav_Logout", Toast.LENGTH_LONG).show();
-                startActivity(new Intent(getBaseContext(), FoodActivity.class));
                 break;
         }
 
