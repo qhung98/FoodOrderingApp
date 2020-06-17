@@ -1,7 +1,6 @@
 package com.example.foodorderingapp;
 //Hiếu đã ghé qua noi đây!!!
 //17-6-2020//
-//cjvhdvksldv
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
