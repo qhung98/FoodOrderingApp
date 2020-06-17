@@ -1,5 +1,5 @@
 package com.example.foodorderingapp;
-
+//Hiếu đã ghé qua noi đây!!!
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
