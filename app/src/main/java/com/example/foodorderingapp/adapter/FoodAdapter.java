@@ -34,7 +34,7 @@ import com.squareup.picasso.Picasso;
 
 public class FoodAdapter extends FirebaseRecyclerAdapter<Food, FoodAdapter.ViewHolder> {
     Context context;
-    DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Restaurants").child("01").child("detail").child("Foods");
+    DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Food");
     CartDatabaseHelper db;
 
     public FoodAdapter(@NonNull FirebaseRecyclerOptions<Food> options, Context context) {

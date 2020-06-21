@@ -64,7 +64,7 @@ public class CartAdapter extends  RecyclerView.Adapter<CartAdapter.ViewHolder>{
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Cart cart = listCart.get(position);
-                                db.deleteCart(cart);
+                                db.deleteCartItem(cart);
 
                                 listCart.remove(position);
                                 notifyDataSetChanged();
