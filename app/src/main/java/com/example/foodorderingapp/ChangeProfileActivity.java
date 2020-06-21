@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class ChangeProfileActivity extends AppCompatActivity {
-    EditText edNewName, edNewPhone, edNewAddress;
+    EditText edNewName, edNewAddress;
     Button btnUpdateProfile;
 
     @Override
@@ -20,7 +20,6 @@ public class ChangeProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_change_profile);
 
         edNewName = findViewById(R.id.edNewName);
-        edNewPhone = findViewById(R.id.edNewPhone);
         edNewAddress = findViewById(R.id.edNewAddress);
         btnUpdateProfile = findViewById(R.id.btnUpdateProfile);
 

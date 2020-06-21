@@ -2,7 +2,7 @@
 <resources>
     <dimen name="text_size_default">16dp</dimen>
     <dimen name="text_size_medium">20dp</dimen>
-    <dimen name="text_size_larger">32dp</dimen>
+    <dimen name="text_size_larger">26dp</dimen>
     <dimen name="text_size_button_default">16dp</dimen>
     <dimen name="height_button_default">45dp</dimen>
     <dimen name="height_edit_text_default">45dp</dimen>

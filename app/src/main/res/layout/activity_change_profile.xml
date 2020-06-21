@@ -41,14 +41,6 @@
             android:inputType="text" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/edNewPhone"
-            style="@style/EditText"
-            android:layout_marginTop="30dp"
-            android:drawableLeft="@drawable/ic_phone"
-            android:hint="Số điện thoại"
-            android:inputType="phone" />
-
-        <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edNewAddress"
             style="@style/EditText"
             android:layout_marginTop="30dp"

@@ -76,7 +76,7 @@
                     android:id="@+id/tvUserName"
                     style="@style/TextViewDefault"
                     android:textAllCaps="true"
-                    android:text="NGUYỄN QUANG HƯNG" />
+                    android:text="NGUYỄN VĂN HOÀNG" />
 
                 <View
                     android:layout_width="match_parent"

@@ -115,10 +115,13 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.nav_info:
-                startActivity(new Intent(getBaseContext(), ProfileActivity.class));
+                startActivity(new Intent(HomeActivity.this, ProfileActivity.class));
                 break;
             case R.id.nav_cart:
                 startActivity(new Intent(HomeActivity.this, CartActivity.class));
+                break;
+            case R.id.nav_history:
+                startActivity(new Intent(HomeActivity.this, OrderHistoryActivity.class));
                 break;
             case R.id.nav_logout:
                 Toast.makeText(getBaseContext(), "LogOut", Toast.LENGTH_LONG).show();
