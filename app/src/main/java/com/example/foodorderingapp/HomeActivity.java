@@ -35,7 +35,7 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
     RecyclerView listMenu;
 
     MenuAdapter menuAdapter;
-    DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Restaurants").child("01").child("detail").child("Category");
+    DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Menu");
     CartDatabaseHelper db;
 
     public static void updateFabCart(int count){

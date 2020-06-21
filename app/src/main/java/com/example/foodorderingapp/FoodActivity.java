@@ -25,7 +25,7 @@ public class FoodActivity extends AppCompatActivity {
     public static CounterFab fab;
     private FoodAdapter foodAdapter;
 
-    DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Restaurants").child("01").child("detail").child("Foods");
+    DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Food");
     CartDatabaseHelper db;
     String menuId = "";
 
@@ -37,6 +37,10 @@ public class FoodActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food);
+
+        if (getIntent().getBooleanExtra("EXIT", false)) {
+            finish();
+        }
 
         SharedPreferences pref = getSharedPreferences("Activity", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();

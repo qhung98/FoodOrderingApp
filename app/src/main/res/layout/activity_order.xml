@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OrderActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/split">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_marginTop="5dp"
+                        style="@style/TextViewMedium"
+                        android:textStyle="bold"
+                        android:text="GIAO HÀNG TỚI"/>
+
+                    <TextView
+                        android:id="@+id/tvOrderUserName"
+                        android:layout_marginTop="15dp"
+                        style="@style/TextViewDefault"
+                        android:textSize="@dimen/text_size_default"
+                        android:textColor="@color/grey"
+                        android:text="NGUYỄN VĂN HOÀNG" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/TextViewDefault"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:textColor="@color/grey"
+                            android:text="SỐ ĐIỆN THOẠI:"/>
+
+                        <TextView
+                            android:id="@+id/tvOrderPhone"
+                            style="@style/TextViewDefault"
+                            android:layout_width="0dp"
+                            android:layout_weight="2"
+                            android:textColor="@color/grey"
+                            android:text="0352929696"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_marginTop="5dp"
+                        style="@style/TextViewMedium"
+                        android:textStyle="bold"
+                        android:text="ĐỊA CHỈ GIAO HÀNG"/>
+
+                    <RadioButton
+                        android:id="@+id/rdHomeAddress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:textSize="@dimen/text_size_default"
+                        android:textColor="@color/grey"
+                        android:textAllCaps="true"
+                        android:text="275 NGUYỄN TRÃI, THANH XUÂN, HÀ NỘI"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rdNewAddress"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="9"
+                            android:textSize="@dimen/text_size_default"
+                            android:textColor="@color/grey"
+                            android:textAllCaps="true"
+                            android:text="GIAO TỚI ĐỊA CHỈ"/>
+
+                        <ImageView
+                            android:id="@+id/ivEditAddress"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            app:srcCompat="@drawable/ic_edit"
+                            android:visibility="invisible"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_marginTop="5dp"
+                        style="@style/TextViewMedium"
+                        android:textStyle="bold"
+                        android:text="THỜI GIAN ĐẶT HÀNG"/>
+
+                    <TextView
+                        android:id="@+id/tvOrderTime"
+                        android:layout_marginTop="15dp"
+                        style="@style/TextViewDefault"
+                        android:textColor="@color/grey"
+                        android:textAllCaps="true"
+                        android:text="15:30:30 - 12 THÁNG 9 NĂM 2022" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_marginTop="5dp"
+                        style="@style/TextViewMedium"
+                        android:textStyle="bold"
+                        android:text="PHƯƠNG THỨC THANH TOÁN"/>
+
+                    <TextView
+                        android:layout_marginTop="15dp"
+                        style="@style/TextViewDefault"
+                        android:textColor="@color/grey"
+                        android:text="THANH TOÁN KHI NHẬN HÀNG" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="15dp"
+                android:padding="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_marginTop="5dp"
+                    style="@style/TextViewMedium"
+                    android:textStyle="bold"
+                    android:text="CHI TIẾT ĐƠN HÀNG"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/listOrder"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="#FBC1BBBB"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            style="@style/TextViewDefault"
+                            android:layout_alignParentStart="true"
+                            android:textColor="#ff707070"
+                            android:text="Tổng đơn hàng"/>
+
+                        <TextView
+                            android:id="@+id/tvOrderCartSum"
+                            style="@style/TextViewDefault"
+                            android:layout_alignParentEnd="true"
+                            android:textColor="#ff707070"
+                            android:text="12000000"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+                        <TextView
+                            style="@style/TextViewDefault"
+                            android:layout_alignParentStart="true"
+                            android:textColor="#ff707070"
+                            android:text="Phí ship"/>
+
+                        <TextView
+                            style="@style/TextViewDefault"
+                            android:layout_alignParentEnd="true"
+                            android:textColor="#ff707070"
+                            android:text="10,000đ"/>
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <View
+        android:id="@+id/split"
+        android:layout_height="2dp"
+        android:layout_width="match_parent"
+        android:layout_above="@id/confirmOrder"
+        android:background="#B7000000"
+        android:layout_margin="5dp"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/confirmOrder"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_alignParentBottom="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp">
+
+            <RelativeLayout
+                android:id="@+id/total_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/TextViewMedium"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerInParent="true"
+                    android:layout_centerHorizontal="true"
+                    android:text="TỔNG CỘNG: "
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvOrderSum"
+                    android:layout_alignParentEnd="true"
+                    android:text="1.200.000đ"
+                    android:textColor="@color/colorPrimary"
+                    style="@style/TextViewMedium"
+                    android:textStyle="bold"/>
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/btnConfirmOrder"
+                style="@style/ButtonRed"
+                android:layout_width="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@id/total_layout"
+                android:text="Xác nhận đặt hàng" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

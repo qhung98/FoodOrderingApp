@@ -40,7 +40,7 @@
             android:layout_below="@+id/imgUser"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15sp"
-            android:text="Nguyen Quang Hung"
+            android:text="NGUYỄN VĂN HOÀNG"
             android:textColor="@color/white" />
 
     </RelativeLayout>

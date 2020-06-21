@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 
 public class CartActivity extends AppCompatActivity {
     RecyclerView listCart;
-    public static TextView tvSum;
+    public static TextView tvCartSum;
     Button btnCartOrder;
 
     CartAdapter cartAdapter;
@@ -27,7 +28,7 @@ public class CartActivity extends AppCompatActivity {
     ArrayList<Cart> list;
 
     public static void updateSum(String sum){
-        tvSum.setText(sum);
+        tvCartSum.setText(sum);
     }
 
     @Override
@@ -36,7 +37,7 @@ public class CartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cart);
 
         listCart = findViewById(R.id.listCart);
-        tvSum = findViewById(R.id.tvSum);
+        tvCartSum = findViewById(R.id.tvCartSum);
         btnCartOrder = findViewById(R.id.btnCartOrder);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -45,16 +46,14 @@ public class CartActivity extends AppCompatActivity {
         db = new CartDatabaseHelper(this);
         list = db.getAllCartItems();
 
-        tvSum.setText(Utils.formatPrice(Utils.calculateSum(list)));
+        tvCartSum.setText(Utils.formatPrice(Utils.calculateSum(list)));
 
         btnCartOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(CartActivity.this, "Cart_Order", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(CartActivity.this, OrderActivity.class));
             }
         });
-
-        list = db.getAllCartItems();
 
         cartAdapter = new CartAdapter(this, list);
 

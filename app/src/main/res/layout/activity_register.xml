@@ -49,13 +49,13 @@
                 style="@style/EditText"
                 android:drawableLeft="@drawable/ic_phone"
                 android:hint="Số điện thoại"
-                android:inputType="textPhonetic" />
+                android:inputType="phone" />
 
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/edRegisterPassword"
                 style="@style/EditText"
                 android:layout_marginTop="20dp"
-                android:drawableLeft="@drawable/ic_lock"
+                android:drawableLeft="@drawable/ic_lock_open"
                 android:hint="Mật khẩu"
                 android:inputType="textPassword" />
 

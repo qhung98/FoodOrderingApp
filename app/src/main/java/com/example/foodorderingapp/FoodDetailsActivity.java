@@ -28,7 +28,7 @@ public class FoodDetailsActivity extends AppCompatActivity {
 
     Button btnDetailOrder;
 
-    DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Restaurants").child("01").child("detail").child("Foods");
+    DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Food");
     CartDatabaseHelper db;
 
     String foodId = "";
