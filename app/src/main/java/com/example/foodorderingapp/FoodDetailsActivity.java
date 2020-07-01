@@ -3,6 +3,7 @@ package com.example.foodorderingapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,7 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
-public class FoodDetailsActivity extends AppCompatActivity {
+public class FoodDetailsActivity extends AppCompatActivity implements NetworkReceiver.ReceiverListener {
     ImageView ivDetailFood;
     TextView tvDetailFoodName, tvDetailPrice, tvDescription;
     ElegantNumberButton btnDetailCount;
@@ -33,6 +34,9 @@ public class FoodDetailsActivity extends AppCompatActivity {
 
     String foodId = "";
     Food food;
+
+    final static String CONNECTIVITY_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
+    NetworkReceiver receiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,11 +130,35 @@ public class FoodDetailsActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(CONNECTIVITY_ACTION);
+        receiver = new NetworkReceiver(this, this);
+        registerReceiver(receiver, intentFilter);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(receiver);
+    }
+
+
+    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home){
             finish();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void checkNetwork(boolean connect) {
+        if (!connect) {
+            receiver.showDialog();
+        }
     }
 }

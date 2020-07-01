@@ -29,7 +29,7 @@ public class ChangeProfileActivity extends AppCompatActivity {
         btnUpdateProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getBaseContext(), "Update_Profile", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "Update Profile", Toast.LENGTH_SHORT).show();
             }
         });
     }

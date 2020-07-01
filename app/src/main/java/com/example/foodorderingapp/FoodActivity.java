@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -20,7 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
-public class FoodActivity extends AppCompatActivity {
+public class FoodActivity extends AppCompatActivity implements NetworkReceiver.ReceiverListener {
     RecyclerView listFood;
     public static CounterFab fab;
     private FoodAdapter foodAdapter;
@@ -28,6 +29,9 @@ public class FoodActivity extends AppCompatActivity {
     DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Food");
     CartDatabaseHelper db;
     String menuId = "";
+
+    final static String CONNECTIVITY_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
+    NetworkReceiver receiver;
 
     public static void updateFabCart(int count){
         fab.setCount(count);
@@ -84,6 +88,23 @@ public class FoodActivity extends AppCompatActivity {
         super.onStart();
         foodAdapter.startListening();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(CONNECTIVITY_ACTION);
+        receiver = new NetworkReceiver(this, this);
+        registerReceiver(receiver, intentFilter);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(receiver);
+    }
+
     @Override
     protected void onStop() {
         super.onStop();
@@ -97,5 +118,12 @@ public class FoodActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void checkNetwork(boolean connect) {
+        if (!connect) {
+            receiver.showDialog();
+        }
     }
 }

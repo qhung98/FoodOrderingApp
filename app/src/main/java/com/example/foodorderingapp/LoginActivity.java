@@ -2,7 +2,12 @@ package com.example.foodorderingapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -44,4 +49,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }

@@ -66,7 +66,7 @@
 
             <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
                 android:id="@+id/btnCartCount"
-                android:layout_width="80dp"
+                android:layout_width="100dp"
                 android:layout_height="40dp"
                 android:layout_alignParentStart="true"
                 android:layout_centerInParent="true"

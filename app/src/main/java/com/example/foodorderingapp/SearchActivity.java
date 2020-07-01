@@ -28,7 +28,7 @@ public class SearchActivity extends AppCompatActivity {
     CounterFab fab;
     private FoodAdapter foodAdapter;
 
-    DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Restaurants").child("01").child("detail").child("Foods");
+    DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Food");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -19,15 +20,17 @@ import android.widget.Toast;
 import com.andremion.counterfab.CounterFab;
 import com.example.foodorderingapp.adapter.MenuAdapter;
 import com.example.foodorderingapp.model.Menu;
+import com.example.foodorderingapp.notification.Token;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.ArrayList;
 
-public class HomeActivity extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener{
+public class HomeActivity extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener, NetworkReceiver.ReceiverListener{
     DrawerLayout drawer;
     Toolbar toolbar;
     NavigationView nav_view;
@@ -37,6 +40,9 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
     MenuAdapter menuAdapter;
     DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Menu");
     CartDatabaseHelper db;
+
+    final static String CONNECTIVITY_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
+    NetworkReceiver receiver;
 
     public static void updateFabCart(int count){
         fab.setCount(count);
@@ -77,6 +83,7 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
         });
 
         loadListMenu();
+        updateToken(FirebaseInstanceId.getInstance().getToken());
     }
 
     private void loadListMenu() {
@@ -94,6 +101,22 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
     protected void onStart() {
         super.onStart();
         menuAdapter.startListening();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(CONNECTIVITY_ACTION);
+        receiver = new NetworkReceiver(this, this);
+        registerReceiver(receiver, intentFilter);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(receiver);
     }
 
     @Override
@@ -120,6 +143,9 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
             case R.id.nav_cart:
                 startActivity(new Intent(HomeActivity.this, CartActivity.class));
                 break;
+            case R.id.nav_search:
+                startActivity(new Intent(HomeActivity.this, SearchActivity.class));
+                break;
             case R.id.nav_history:
                 startActivity(new Intent(HomeActivity.this, OrderHistoryActivity.class));
                 break;
@@ -144,5 +170,18 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void checkNetwork(boolean connect) {
+        if (!connect) {
+            receiver.showDialog();
+        }
+    }
+
+    private void updateToken(String tokenRefreshed) {
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Token");
+        Token token = new Token(tokenRefreshed, false);
+        dbRef.child("0987654321").setValue(token);
     }
 }

@@ -3,9 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
-    android:layout_marginTop="20dp"
+    android:layout_margin="10dp"
     app:cardElevation="5dp"
     app:cardCornerRadius="5dp">
 
@@ -22,112 +20,98 @@
             android:text="ID: 123456789"
             android:gravity="center_horizontal" />
 
-        <LinearLayout
+        <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="5dp">
+            android:shrinkColumns="1">
 
-            <TextView
-                style="@style/TextViewDefault"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:textStyle="bold"
-                android:text="NGƯỜI ĐẶT: "/>
+            <TableRow
+                android:padding="5dp">
+                <TextView
+                    style="@style/TextViewDefault"
+                    android:textStyle="bold"
+                    android:text="NGƯỜI ĐẶT: "/>
 
-            <TextView
-                android:id="@+id/tvHistoryUserName"
-                style="@style/TextViewDefault"
-                android:layout_width="0dp"
-                android:layout_weight="3"
-                android:textAllCaps="true"
-                android:text="NGUYỄN VĂN HOÀNG"/>
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/tvHistoryUserName"
+                    style="@style/TextViewDefault"
+                    android:textAllCaps="true"
+                    android:layout_marginLeft="5dp"
+                    android:text="NGUYỄN VĂN HOÀNG"/>
+            </TableRow>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="5dp">
+            <TableRow
+                android:padding="5dp">
+                <TextView
+                    style="@style/TextViewDefault"
+                    android:textStyle="bold"
+                    android:text="SỐ ĐIỆN THOẠI:"/>
 
-            <TextView
-                style="@style/TextViewDefault"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:textStyle="bold"
-                android:text="SỐ ĐIỆN THOẠI:"/>
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:id="@+id/tvHistoryPhone"
+                    style="@style/TextViewDefault"
+                    android:text="0352429696"/>
+            </TableRow>
 
-            <TextView
-                android:id="@+id/tvHistoryPhone"
-                style="@style/TextViewDefault"
-                android:layout_width="0dp"
-                android:layout_weight="2"
-                android:text="0352429696"/>
-        </LinearLayout>
+            <TableRow
+                android:padding="5dp">
+                <TextView
+                    style="@style/TextViewDefault"
+                    android:textStyle="bold"
+                    android:text="GIAO TỚI: "/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="5dp">
+                <TextView
+                    android:id="@+id/tvHistoryAddress"
+                    style="@style/TextViewDefault"
+                    android:textAllCaps="true"
+                    android:layout_marginLeft="5dp"
+                    android:text="275 NGUYỄN TRÃI, THANH XUÂN, HÀ NỘi"/>
 
-            <TextView
-                style="@style/TextViewDefault"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:textStyle="bold"
-                android:text="GIAO TỚI: "/>
+            </TableRow>
 
-            <TextView
-                android:id="@+id/tvHistoryAddress"
-                style="@style/TextViewDefault"
-                android:layout_width="0dp"
-                android:layout_weight="4"
-                android:textAllCaps="true"
-                android:text="275 NGUYỄN TRÃI, THANH XUÂN, HÀ NỘi"/>
-        </LinearLayout>
+            <TableRow
+                android:padding="5dp">
+                <TextView
+                    style="@style/TextViewDefault"
+                    android:textStyle="bold"
+                    android:text="NGÀY ĐẶT:"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="5dp">
+                <TextView
+                    android:id="@+id/tvHistoryTime"
+                    style="@style/TextViewDefault"
+                    android:layout_marginLeft="5dp"
+                    android:text="16:03:02 - 02/06/2020"/>
+            </TableRow>
 
-            <TextView
-                style="@style/TextViewDefault"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:textStyle="bold"
-                android:text="NGÀY ĐẶT:"/>
+            <TableRow
+                android:padding="5dp">
+                <TextView
+                    style="@style/TextViewDefault"
+                    android:textStyle="bold"
+                    android:text="TỔNG ĐƠN HÀNG:"/>
 
-            <TextView
-                android:id="@+id/tvHistoryTime"
-                style="@style/TextViewDefault"
-                android:layout_width="0dp"
-                android:layout_weight="3"
-                android:text="16:03:02 - 02/06/2020"/>
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/tvHistorySum"
+                    style="@style/TextViewDefault"
+                    android:layout_marginLeft="5dp"
+                    android:text="1,200,000đ"/>
+            </TableRow>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="5dp">
+            <TableRow
+                android:padding="5dp">
+                <TextView
+                    style="@style/TextViewDefault"
+                    android:textStyle="bold"
+                    android:text="TRẠNG THÁI:"/>
 
-            <TextView
-                style="@style/TextViewDefault"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:textStyle="bold"
-                android:text="TỔNG ĐƠN HÀNG:"/>
-
-            <TextView
-                android:id="@+id/tvHistorySum"
-                style="@style/TextViewDefault"
-                android:layout_width="0dp"
-                android:layout_weight="1.5"
-                android:text="1,200,000đ"/>
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/tvStatus"
+                    style="@style/TextViewDefault"
+                    android:layout_marginLeft="5dp"
+                    android:text="ĐANG CHỜ XỬ LÝ"/>
+            </TableRow>
+        </TableLayout>
 
     </LinearLayout>
 

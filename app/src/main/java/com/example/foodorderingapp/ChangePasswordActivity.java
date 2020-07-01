@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ChangePasswordActivity extends AppCompatActivity {
     EditText edCurrentPassword, edNewPassword, edConfirmPassword;
@@ -30,7 +31,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
         btnUpdatePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Toast.makeText(getBaseContext(), "CHANGE PASSWORD", Toast.LENGTH_SHORT).show();
             }
         });
     }

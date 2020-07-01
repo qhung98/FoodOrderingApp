@@ -42,6 +42,43 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:444942494319:android:ccfa29be64acd5cb78bb9a",
+        "android_client_info": {
+          "package_name": "com.example.serverfoodordering"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "444942494319-as0beqdl4pqfs8tlfsmn2h4d1uhq3tn9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.serverfoodordering",
+            "certificate_hash": "bb6d4600d0c55ba97ae854d8a1dd41f9e9c969b1"
+          }
+        },
+        {
+          "client_id": "444942494319-8jsjght0oki5tagibcch4mq3isfg9ubm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDX2RUZVF1Azpc1PPySTtf-OqAXseyTMfA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "444942494319-8jsjght0oki5tagibcch4mq3isfg9ubm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"

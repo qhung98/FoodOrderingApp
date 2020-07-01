@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,7 +19,7 @@ import com.example.foodorderingapp.model.Cart;
 
 import java.util.ArrayList;
 
-public class CartActivity extends AppCompatActivity {
+public class CartActivity extends AppCompatActivity implements NetworkReceiver.ReceiverListener {
     RecyclerView listCart;
     public static TextView tvCartSum;
     Button btnCartOrder;
@@ -26,6 +27,9 @@ public class CartActivity extends AppCompatActivity {
     CartAdapter cartAdapter;
     CartDatabaseHelper db;
     ArrayList<Cart> list;
+
+    final static String CONNECTIVITY_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
+    NetworkReceiver receiver;
 
     public static void updateSum(String sum){
         tvCartSum.setText(sum);
@@ -69,5 +73,28 @@ public class CartActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(CONNECTIVITY_ACTION);
+        receiver = new NetworkReceiver(this, this);
+        registerReceiver(receiver, intentFilter);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(receiver);
+    }
+
+    @Override
+    public void checkNetwork(boolean connect) {
+        if (!connect) {
+            receiver.showDialog();
+        }
     }
 }

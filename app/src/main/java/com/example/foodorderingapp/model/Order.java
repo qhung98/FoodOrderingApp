@@ -10,20 +10,22 @@ public class Order {
     private String time;
     private String sum;
     private ArrayList<Cart> listFood;
+    private int status;
 
     public Order() {
     }
 
-    public Order(String name, String phone, String address, String time, String sum, ArrayList<Cart> listFood) {
+    public Order(String name, String phone, String address, String time, String sum, ArrayList<Cart> listFood, int status) {
         this.name = name;
         this.phone = phone;
         this.address = address;
         this.time = time;
         this.sum = sum;
         this.listFood = listFood;
+        this.status = status;
     }
 
-    public Order(String id, String name, String phone, String address, String time, String sum, ArrayList<Cart> listFood) {
+    public Order(String id, String name, String phone, String address, String time, String sum, ArrayList<Cart> listFood, int status) {
         this.id = id;
         this.name = name;
         this.phone = phone;
@@ -31,6 +33,7 @@ public class Order {
         this.time = time;
         this.sum = sum;
         this.listFood = listFood;
+        this.status = status;
     }
 
     public String getId() {
@@ -87,5 +90,13 @@ public class Order {
 
     public void setListFood(ArrayList<Cart> listFood) {
         this.listFood = listFood;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }
