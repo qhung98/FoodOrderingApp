@@ -35,7 +35,7 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
     RecyclerView listMenu;
 
     MenuAdapter menuAdapter;
-    DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Restaurants").child("01").child("detail").child("Category");
+    DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Menu");
     CartDatabaseHelper db;
 
     public static void updateFabCart(int count){
@@ -121,6 +121,9 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
                 startActivity(new Intent(HomeActivity.this, CartActivity.class));
                 break;
             case R.id.nav_logout:
+                Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
                 Toast.makeText(getBaseContext(), "Nav_Logout", Toast.LENGTH_LONG).show();
                 break;
         }

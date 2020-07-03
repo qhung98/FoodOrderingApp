@@ -28,7 +28,7 @@ import com.squareup.picasso.Picasso;
 
 public class MenuAdapter extends FirebaseRecyclerAdapter<Menu, MenuAdapter.ViewHolder> {
     Context context;
-    DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Restaurants").child("01").child("detail").child("Category");
+    DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Menu");
     public MenuAdapter(@NonNull FirebaseRecyclerOptions<Menu> options, Context context) {
         super(options);
         this.context = context;
