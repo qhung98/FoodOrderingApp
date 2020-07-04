@@ -19,7 +19,7 @@
             android:elevation="5dp"
             app:cardCornerRadius="5dp">
 
-            <com.mancj.materialsearchbar.MaterialSearchBar
+            <androidx.appcompat.widget.SearchView
                 android:id="@+id/searchBar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />

@@ -71,9 +71,8 @@ public class CartAdapter extends  RecyclerView.Adapter<CartAdapter.ViewHolder>{
 
                                 HomeActivity.updateFabCart(db.getCartCount());
 
-                                SharedPreferences pref = context.getSharedPreferences("Activity", Context.MODE_PRIVATE);
-                                String act = pref.getString("foodActivity", "");
-                                if(act.equals("created")){
+                                boolean foodState = Utils.getActivityState(context, "food");
+                                if(foodState){
                                     FoodActivity.updateFabCart(db.getCartCount());
                                 }
 
@@ -106,9 +105,8 @@ public class CartAdapter extends  RecyclerView.Adapter<CartAdapter.ViewHolder>{
 
                 HomeActivity.updateFabCart(db.getCartCount());
 
-                SharedPreferences pref = context.getSharedPreferences("Activity", Context.MODE_PRIVATE);
-                String act = pref.getString("foodActivity", "");
-                if(act.equals("created")){
+                boolean foodState = Utils.getActivityState(context, "food");
+                if(foodState){
                     FoodActivity.updateFabCart(db.getCartCount());
                 }
 

@@ -46,10 +46,7 @@ public class FoodActivity extends AppCompatActivity implements NetworkReceiver.R
             finish();
         }
 
-        SharedPreferences pref = getSharedPreferences("Activity", MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        editor.putString("foodActivity", "created");
-        editor.commit();
+        Utils.setActivityState(this, "food", true);
 
         listFood = findViewById(R.id.listFood);
         fab = findViewById(R.id.fab);

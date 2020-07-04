@@ -20,6 +20,7 @@ import com.example.foodorderingapp.FoodActivity;
 import com.example.foodorderingapp.FoodDetailsActivity;
 import com.example.foodorderingapp.HomeActivity;
 import com.example.foodorderingapp.R;
+import com.example.foodorderingapp.SearchActivity;
 import com.example.foodorderingapp.Utils;
 import com.example.foodorderingapp.model.Cart;
 import com.example.foodorderingapp.model.Food;
@@ -62,7 +63,17 @@ public class FoodAdapter extends FirebaseRecyclerAdapter<Food, FoodAdapter.ViewH
 
                     int count = db.getCartCount();
                     HomeActivity.updateFabCart(count);
-                    FoodActivity.updateFabCart(count);
+
+                    boolean foodState = Utils.getActivityState(context, "food");
+                    if(foodState) {
+                        FoodActivity.updateFabCart(count);
+                    }
+
+                    boolean searchState = Utils.getActivityState(context, "search");
+                    if(searchState){
+                        SearchActivity.updateFabCart(count);
+                    }
+
                     Toast.makeText(context, "Cập nhật giỏ hàng thành công!", Toast.LENGTH_SHORT).show();
                 }
                 else {
@@ -73,7 +84,17 @@ public class FoodAdapter extends FirebaseRecyclerAdapter<Food, FoodAdapter.ViewH
 
                     int count = db.getCartCount();
                     HomeActivity.updateFabCart(count);
-                    FoodActivity.updateFabCart(count);
+
+                    boolean foodState = Utils.getActivityState(context, "food");
+                    if(foodState) {
+                        FoodActivity.updateFabCart(count);
+                    }
+
+                    boolean searchState = Utils.getActivityState(context, "search");
+                    if(searchState){
+                        SearchActivity.updateFabCart(count);
+                    }
+
                     Toast.makeText(context, "Thêm vào giỏ hàng thành công", Toast.LENGTH_SHORT).show();
                 }
             }

@@ -42,8 +42,8 @@
             android:id="@+id/edLoginPhone"
             android:drawableLeft="@drawable/ic_phone"
             android:hint="Số điện thoại"
-            android:inputType="textPhonetic"
-            style="@style/EditText" />
+            android:inputType="number"
+            style="@style/EditText"/>
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edLoginPassword"

@@ -79,7 +79,17 @@ public class FoodDetailsActivity extends AppCompatActivity implements NetworkRec
 
                     int count = db.getCartCount();
                     HomeActivity.updateFabCart(count);
-                    FoodActivity.updateFabCart(count);
+
+                    boolean foodState = Utils.getActivityState(FoodDetailsActivity.this, "food");
+                    if(foodState){
+                        FoodActivity.updateFabCart(count);
+                    }
+
+                    boolean searchState = Utils.getActivityState(FoodDetailsActivity.this, "search");
+                    if(searchState){
+                        SearchActivity.updateFabCart(count);
+                    }
+
                     Toast.makeText(FoodDetailsActivity.this, "Cập nhật giỏ hàng thành công!", Toast.LENGTH_SHORT).show();
                 }
                 else {
@@ -88,7 +98,17 @@ public class FoodDetailsActivity extends AppCompatActivity implements NetworkRec
 
                     int count = db.getCartCount();
                     HomeActivity.updateFabCart(count);
-                    FoodActivity.updateFabCart(count);
+
+                    boolean foodState = Utils.getActivityState(FoodDetailsActivity.this, "food");
+                    if(foodState){
+                        FoodActivity.updateFabCart(count);
+                    }
+
+                    boolean searchState = Utils.getActivityState(FoodDetailsActivity.this, "search");
+                    if(searchState){
+                        SearchActivity.updateFabCart(count);
+                    }
+
                     Toast.makeText(FoodDetailsActivity.this, "Thêm vào giỏ hàng thành công!", Toast.LENGTH_SHORT).show();
                 }
 

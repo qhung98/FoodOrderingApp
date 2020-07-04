@@ -15,11 +15,13 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.andremion.counterfab.CounterFab;
 import com.example.foodorderingapp.adapter.MenuAdapter;
 import com.example.foodorderingapp.model.Menu;
+import com.example.foodorderingapp.model.User;
 import com.example.foodorderingapp.notification.Token;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.navigation.NavigationView;
@@ -34,6 +36,8 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
     DrawerLayout drawer;
     Toolbar toolbar;
     NavigationView nav_view;
+    View nav_header;
+    TextView nav_tvUsername, nav_tvPhone;
     public static CounterFab fab;
     RecyclerView listMenu;
 
@@ -53,16 +57,15 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        SharedPreferences pref = getSharedPreferences("Activity", MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        editor.putString("foodActivity", "notCreated");
-        editor.commit();
-
         toolbar = findViewById(R.id.toolbar);
         drawer = findViewById(R.id.drawer_layout);
         nav_view = findViewById(R.id.nav_view);
         fab = findViewById(R.id.fab);
         listMenu = findViewById(R.id.listMenu);
+
+        nav_header = nav_view.getHeaderView(0);
+        nav_tvUsername = nav_header.findViewById(R.id.nav_tvUsername);
+        nav_tvPhone = nav_header.findViewById(R.id.nav_tvPhone);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("KFC");
@@ -71,6 +74,18 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        Utils.setActivityState(this, "food", false);
+        Utils.setActivityState(this, "search", false);
+
+        User user = Utils.getCurrentUser(this);
+
+        if(user == null){
+            Toast.makeText(getBaseContext(), "USER NULL", Toast.LENGTH_LONG).show();
+        }
+
+        nav_tvUsername.setText(user.getName());
+        nav_tvPhone.setText(String.valueOf(user.getPhone()));
 
         db = new CartDatabaseHelper(this);
         fab.setCount(db.getCartCount());
@@ -130,7 +145,7 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+           this.moveTaskToBack(true);
         }
     }
 
@@ -150,7 +165,10 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
                 startActivity(new Intent(HomeActivity.this, OrderHistoryActivity.class));
                 break;
             case R.id.nav_logout:
-                Toast.makeText(getBaseContext(), "LogOut", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                Utils.setRememberUser(this, false);
+                startActivity(intent);
                 break;
         }
 

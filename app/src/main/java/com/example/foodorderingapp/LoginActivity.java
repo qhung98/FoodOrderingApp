@@ -16,6 +16,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.foodorderingapp.model.User;
+
 public class LoginActivity extends AppCompatActivity {
     EditText edLoginPhone, edLoginPassword;
     CheckBox ckbRemember;
@@ -38,6 +40,13 @@ public class LoginActivity extends AppCompatActivity {
         btnLoginForm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                User user = new User("0987654321", "asdf", "Nguyễn Văn Hoàng", "275 NGUYỄN TRÃI, THANH XUÂN, HÀ NỘI");
+                Utils.setCurrentUser(LoginActivity.this, user);
+
+                if(ckbRemember.isChecked()){
+                    Utils.setRememberUser(LoginActivity.this, true);
+                }
+
                 startActivity(new Intent(LoginActivity.this, HomeActivity.class));
             }
         });
@@ -45,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
         tvForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getBaseContext(), "Forgot_Password", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(LoginActivity.this, PhoneAuthenticationActivity.class));
             }
         });
     }

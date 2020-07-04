@@ -13,13 +13,15 @@
         android:layout_marginLeft="10dp"
         android:src="@drawable/ic_avatar" />
     <TextView
+        android:id="@+id/nav_tvUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/text_size_default"
         android:paddingTop="8dp"
-        android:text="Nguyen Quang Hung"
+        android:text="Nguyen Van Hoang"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
     <TextView
+        android:id="@+id/nav_tvPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/text_size_default"

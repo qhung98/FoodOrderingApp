@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.example.foodorderingapp.adapter.OrderAdapter;
 import com.example.foodorderingapp.model.Cart;
 import com.example.foodorderingapp.model.Order;
+import com.example.foodorderingapp.model.User;
 import com.example.foodorderingapp.notification.MyResponse;
 import com.example.foodorderingapp.notification.Notification;
 import com.example.foodorderingapp.notification.RetrofitAPI;
@@ -61,7 +62,7 @@ public class OrderActivity extends AppCompatActivity implements CompoundButton.O
     DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Order");
     CartDatabaseHelper db;
 
-    String homeAddress = "275 NGUYỄN TRÃI, THANH XUÂN, HÀ NỘI";
+    String homeAddress;
     String newAddress = "";
 
     final static String CONNECTIVITY_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
@@ -90,6 +91,11 @@ public class OrderActivity extends AppCompatActivity implements CompoundButton.O
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("ĐẶT HÀNG");
+
+        User user = Utils.getCurrentUser(this);
+        tvOrderUserName.setText(user.getName());
+        tvOrderPhone.setText(String.valueOf(user.getPhone()));
+        homeAddress = user.getAddress();
 
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss - dd/MM/yyyy");
         sdf.setTimeZone(TimeZone.getTimeZone("GMT+7"));
@@ -155,9 +161,8 @@ public class OrderActivity extends AppCompatActivity implements CompoundButton.O
 
 
                 HomeActivity.updateFabCart(0);
-                Intent intent = new Intent(getBaseContext(), FoodActivity.class);
+                Intent intent = new Intent(getBaseContext(), HomeActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("EXIT", true);
                 startActivity(intent);
             }
         });

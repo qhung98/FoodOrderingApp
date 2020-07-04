@@ -12,7 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".OrderHistoryActivity"></activity>
+        <activity android:name=".CodeVerificationActivity"></activity>
+        <activity android:name=".PhoneAuthenticationActivity" />
+        <activity android:name=".ForgotPasswordActivity" />
+        <activity android:name=".OrderHistoryActivity" />
         <activity android:name=".OrderActivity" />
         <activity android:name=".ChangeProfileActivity" />
         <activity android:name=".ChangePasswordActivity" />
@@ -43,7 +46,6 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
     </application>
 
 </manifest>

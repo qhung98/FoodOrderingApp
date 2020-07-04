@@ -2,6 +2,7 @@ package com.example.foodorderingapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,17 +19,22 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-import com.mancj.materialsearchbar.MaterialSearchBar;
+
 
 import java.security.PrivateKey;
 
 public class SearchActivity extends AppCompatActivity {
-    MaterialSearchBar searchBar;
+    SearchView searchBar;
     RecyclerView listSearch;
-    CounterFab fab;
+    static CounterFab fab;
     private FoodAdapter foodAdapter;
 
     DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Food");
+    CartDatabaseHelper db;
+
+    public static void updateFabCart(int count){
+        fab.setCount(count);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +44,12 @@ public class SearchActivity extends AppCompatActivity {
         searchBar = findViewById(R.id.searchBar);
         listSearch = findViewById(R.id.listSearch);
         fab = findViewById(R.id.fab);
+
+        Utils.setActivityState(this, "search", true);
+
+        db = new CartDatabaseHelper(this);
+
+        fab.setCount(db.getCartCount());
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

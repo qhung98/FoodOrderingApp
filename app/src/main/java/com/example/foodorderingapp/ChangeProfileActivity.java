@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.foodorderingapp.model.User;
+
 public class ChangeProfileActivity extends AppCompatActivity {
     EditText edNewName, edNewAddress;
     Button btnUpdateProfile;
@@ -26,10 +28,16 @@ public class ChangeProfileActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("KFC");
 
+        User user = Utils.getCurrentUser(this);
+        edNewName.setText(user.getName());
+        edNewAddress.setText(user.getAddress());
+
         btnUpdateProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getBaseContext(), "Update Profile", Toast.LENGTH_SHORT).show();
+                setResult(RESULT_OK);
+                finish();
             }
         });
     }
