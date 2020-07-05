@@ -37,7 +37,7 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
     Toolbar toolbar;
     NavigationView nav_view;
     View nav_header;
-    TextView nav_tvUsername, nav_tvPhone;
+    public static TextView nav_tvUsername, nav_tvPhone;
     public static CounterFab fab;
     RecyclerView listMenu;
 
@@ -79,10 +79,6 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
         Utils.setActivityState(this, "search", false);
 
         User user = Utils.getCurrentUser(this);
-
-        if(user == null){
-            Toast.makeText(getBaseContext(), "USER NULL", Toast.LENGTH_LONG).show();
-        }
 
         nav_tvUsername.setText(user.getName());
         nav_tvPhone.setText(String.valueOf(user.getPhone()));
@@ -190,6 +186,11 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
         return super.onOptionsItemSelected(item);
     }
 
+    public static void updateDrawerMenu(User user){
+        nav_tvUsername.setText(user.getName());
+        nav_tvPhone.setText(String.valueOf(user.getPhone()));
+    }
+
     @Override
     public void checkNetwork(boolean connect) {
         if (!connect) {
@@ -198,8 +199,9 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
     }
 
     private void updateToken(String tokenRefreshed) {
+        User user = Utils.getCurrentUser(this);
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Token");
         Token token = new Token(tokenRefreshed, false);
-        dbRef.child("0987654321").setValue(token);
+        dbRef.child(user.getPhone()).setValue(token);
     }
 }

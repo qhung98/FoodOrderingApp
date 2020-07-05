@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.example.foodorderingapp.model.User;
 
 public class ProfileActivity extends AppCompatActivity {
-    TextView tvUserName, tvUserPhone, tvUserAddress;
+    TextView tvProfileName, tvUserName, tvUserPhone, tvUserAddress;
     Button btnChangePassword, btnChangeProfile;
 
     @Override
@@ -22,6 +22,7 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        tvProfileName = findViewById(R.id.tvProfileName);
         tvUserName = findViewById(R.id.tvUserName);
         tvUserPhone = findViewById(R.id.tvUserPhone);
         tvUserAddress = findViewById(R.id.tvUserAddress);
@@ -33,6 +34,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         User user = Utils.getCurrentUser(this);
 
+        tvProfileName.setText(user.getName());
         tvUserName.setText(user.getName());
         tvUserPhone.setText(String.valueOf(user.getPhone()));
         tvUserAddress.setText(user.getAddress());

@@ -1,6 +1,7 @@
 package com.example.foodorderingapp;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,14 +18,20 @@ import com.andremion.counterfab.CounterFab;
 import com.example.foodorderingapp.adapter.FoodAdapter;
 import com.example.foodorderingapp.model.Food;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class FoodActivity extends AppCompatActivity implements NetworkReceiver.ReceiverListener {
     RecyclerView listFood;
     public static CounterFab fab;
-    private FoodAdapter foodAdapter;
+    FoodAdapter foodAdapter;
+    ArrayList<Food> list = new ArrayList<>();
 
     DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Food");
     CartDatabaseHelper db;
@@ -33,21 +40,10 @@ public class FoodActivity extends AppCompatActivity implements NetworkReceiver.R
     final static String CONNECTIVITY_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
     NetworkReceiver receiver;
 
-    public static void updateFabCart(int count){
-        fab.setCount(count);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food);
-
-        if (getIntent().getBooleanExtra("EXIT", false)) {
-            finish();
-        }
-
-        Utils.setActivityState(this, "food", true);
-
         listFood = findViewById(R.id.listFood);
         fab = findViewById(R.id.fab);
 
@@ -56,6 +52,10 @@ public class FoodActivity extends AppCompatActivity implements NetworkReceiver.R
         getSupportActionBar().setTitle(menuName);
 
         db = new CartDatabaseHelper(this);
+
+        listFood.setHasFixedSize(true);
+        listFood.setLayoutManager(new LinearLayoutManager(this));
+
         fab.setCount(db.getCartCount());
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -65,25 +65,32 @@ public class FoodActivity extends AppCompatActivity implements NetworkReceiver.R
             }
         });
 
+        Utils.setActivityState(this, "food", true);
+
         menuId = getIntent().getStringExtra("menuId");
+
         loadListFood();
     }
 
     private void loadListFood() {
         Query query = dbRef.orderByChild("menuId").equalTo(menuId);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                        list.add(ds.getValue(Food.class));
+                    }
+                    foodAdapter = new FoodAdapter(FoodActivity.this, list);
+                    listFood.setAdapter(foodAdapter);
+                }
+            }
 
-        FirebaseRecyclerOptions<Food> options = new FirebaseRecyclerOptions.Builder<Food>().setQuery(query, Food.class).build();
-        foodAdapter = new FoodAdapter(options, this);
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-        listFood.setHasFixedSize(true);
-        listFood.setLayoutManager(new LinearLayoutManager(this));
-        listFood.setAdapter(foodAdapter);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        foodAdapter.startListening();
+            }
+        });
     }
 
     @Override
@@ -103,18 +110,16 @@ public class FoodActivity extends AppCompatActivity implements NetworkReceiver.R
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
-        foodAdapter.stopListening();
-    }
-
-    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home){
             finish();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public static void updateFabCart(int count){
+        fab.setCount(count);
     }
 
     @Override

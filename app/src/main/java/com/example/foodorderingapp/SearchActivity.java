@@ -10,44 +10,46 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.andremion.counterfab.CounterFab;
 import com.example.foodorderingapp.adapter.FoodAdapter;
 import com.example.foodorderingapp.model.Food;
 import com.example.foodorderingapp.model.Menu;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 
 import java.security.PrivateKey;
+import java.util.ArrayList;
 
 public class SearchActivity extends AppCompatActivity {
-    SearchView searchBar;
+    SearchView searchView;
     RecyclerView listSearch;
     static CounterFab fab;
-    private FoodAdapter foodAdapter;
 
     DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Food");
     CartDatabaseHelper db;
 
-    public static void updateFabCart(int count){
-        fab.setCount(count);
-    }
+    ArrayList<Food> list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        searchBar = findViewById(R.id.searchBar);
+        searchView = findViewById(R.id.searchView);
         listSearch = findViewById(R.id.listSearch);
         fab = findViewById(R.id.fab);
-
-        Utils.setActivityState(this, "search", true);
-
         db = new CartDatabaseHelper(this);
+
+        listSearch.setHasFixedSize(true);
+        listSearch.setLayoutManager(new LinearLayoutManager(SearchActivity.this));
 
         fab.setCount(db.getCartCount());
 
@@ -61,29 +63,56 @@ public class SearchActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("TÌM KIẾM");
 
+        Utils.setActivityState(this, "search", true);
+
         loadListSearch();
+
+        if (searchView != null) {
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    search(newText);
+                    return true;
+                }
+            });
+        }
     }
 
     private void loadListSearch() {
-        Query query = dbRef.orderByKey();
+        dbRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                        list.add(ds.getValue(Food.class));
+                    }
+                    FoodAdapter foodAdapter = new FoodAdapter(SearchActivity.this, list);
+                    listSearch.setAdapter(foodAdapter);
+                }
+            }
 
-        FirebaseRecyclerOptions<Food> options = new FirebaseRecyclerOptions.Builder<Food>().setQuery(query, Food.class).build();
-        foodAdapter = new FoodAdapter(options, this);
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-        listSearch.setHasFixedSize(true);
-        listSearch.setLayoutManager(new LinearLayoutManager(this));
+            }
+        });
+    }
+
+    private void search(String newText) {
+        ArrayList<Food> filterList = new ArrayList<>();
+        for(Food food:list){
+            if(food.getName().toLowerCase().contains(newText.toLowerCase())){
+               filterList.add(food);
+            }
+        }
+
+        FoodAdapter foodAdapter = new FoodAdapter(this, filterList);
         listSearch.setAdapter(foodAdapter);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        foodAdapter.startListening();
-    }
-    @Override
-    protected void onStop() {
-        super.onStop();
-        foodAdapter.stopListening();
     }
 
     @Override
@@ -91,7 +120,10 @@ public class SearchActivity extends AppCompatActivity {
         if (item.getItemId() == android.R.id.home){
             finish();
         }
-
         return super.onOptionsItemSelected(item);
+    }
+
+    public static void updateFabCart(int count){
+        fab.setCount(count);
     }
 }

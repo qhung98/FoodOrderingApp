@@ -45,11 +45,20 @@
             android:orientation="vertical">
 
             <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/edRegisterPhone"
+                android:id="@+id/edPersonName"
                 style="@style/EditText"
-                android:drawableLeft="@drawable/ic_phone"
-                android:hint="Số điện thoại"
-                android:inputType="phone" />
+                android:layout_marginTop="20dp"
+                android:drawableLeft="@drawable/ic_person"
+                android:hint="Họ tên"
+                android:inputType="textPersonName" />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/edRegisterAddress"
+                style="@style/EditText"
+                android:layout_marginTop="20dp"
+                android:drawableLeft="@drawable/ic_location"
+                android:hint="Địa chỉ"
+                android:inputType="text" />
 
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/edRegisterPassword"
@@ -66,22 +75,6 @@
                 android:drawableLeft="@drawable/ic_lock_outline"
                 android:hint="Nhập lại mật khẩu"
                 android:inputType="textPassword" />
-
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/edPersonName"
-                style="@style/EditText"
-                android:layout_marginTop="20dp"
-                android:drawableLeft="@drawable/ic_person"
-                android:hint="Họ tên"
-                android:inputType="textPersonName" />
-
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/edRegisterAddress"
-                style="@style/EditText"
-                android:layout_marginTop="20dp"
-                android:drawableLeft="@drawable/ic_location"
-                android:hint="Địa chỉ"
-                android:inputType="text" />
 
             <Button
                 android:id="@+id/btnRegisterForm"

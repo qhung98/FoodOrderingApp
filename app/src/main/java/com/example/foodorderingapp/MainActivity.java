@@ -1,5 +1,6 @@
 package com.example.foodorderingapp;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -34,8 +35,12 @@ public class MainActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, PhoneAuthenticationActivity.class));
+                Utils.setActivityState(MainActivity.this, "isRegister", true);
+                Intent intent = new Intent(MainActivity.this, PhoneAuthActivity.class);
+                intent.putExtra("isRegister", true);
+                startActivity(intent);
             }
         });
     }
+
 }

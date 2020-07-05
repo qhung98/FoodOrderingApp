@@ -12,8 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CodeVerificationActivity"></activity>
-        <activity android:name=".PhoneAuthenticationActivity" />
+        <activity android:name=".CodeVerifyActivity"></activity>
+        <activity android:name=".PhoneAuthActivity" />
         <activity android:name=".ForgotPasswordActivity" />
         <activity android:name=".OrderHistoryActivity" />
         <activity android:name=".OrderActivity" />

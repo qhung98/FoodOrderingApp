@@ -159,9 +159,8 @@ public class OrderActivity extends AppCompatActivity implements CompoundButton.O
                     }
                 });
 
-
                 HomeActivity.updateFabCart(0);
-                Intent intent = new Intent(getBaseContext(), HomeActivity.class);
+                Intent intent = new Intent(OrderActivity.this, HomeActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }

@@ -11,10 +11,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.foodorderingapp.model.User;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class ChangeProfileActivity extends AppCompatActivity {
     EditText edNewName, edNewAddress;
     Button btnUpdateProfile;
+    DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("User");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,16 +31,35 @@ public class ChangeProfileActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("KFC");
 
-        User user = Utils.getCurrentUser(this);
-        edNewName.setText(user.getName());
-        edNewAddress.setText(user.getAddress());
+        final User currentUser = Utils.getCurrentUser(this);
+        edNewName.setText(currentUser.getName());
+        edNewAddress.setText(currentUser.getAddress());
 
         btnUpdateProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getBaseContext(), "Update Profile", Toast.LENGTH_SHORT).show();
-                setResult(RESULT_OK);
-                finish();
+                String newName = edNewName.getText().toString();
+                String newAddress = edNewAddress.getText().toString();
+
+                if (newName.isEmpty() || newAddress.isEmpty()){
+                    Toast.makeText(ChangeProfileActivity.this, "Xin điền thông tin vào các ô trống!", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    String password = currentUser.getPassword();
+                    String phone = currentUser.getPhone();
+
+                    dbRef.child(phone).child("name").setValue(newName);
+                    dbRef.child(phone).child("address").setValue(newAddress);
+
+                    User editedUser = new User(phone, password, newName, newAddress);
+                    Utils.setCurrentUser(ChangeProfileActivity.this, editedUser);
+
+                    HomeActivity.updateDrawerMenu(editedUser);
+
+                    Toast.makeText(getBaseContext(), "Cập nhật thông tin thành công", Toast.LENGTH_SHORT).show();
+                    setResult(RESULT_OK);
+                    finish();
+                }
             }
         });
     }
@@ -50,4 +72,5 @@ public class ChangeProfileActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }
