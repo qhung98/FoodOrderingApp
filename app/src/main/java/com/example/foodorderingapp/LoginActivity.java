@@ -3,6 +3,7 @@ package com.example.foodorderingapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -24,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     CheckBox ckbRemember;
     Button btnLoginForm;
     TextView tvForgotPassword;
+    ProgressDialog progressDialog;
 
     DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("User");
     String phone, password;
@@ -44,10 +46,16 @@ public class LoginActivity extends AppCompatActivity {
         btnLoginForm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressDialog = new ProgressDialog(LoginActivity.this);
+                progressDialog.setMessage("Loading...");
+                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                progressDialog.show();
+
                 phone = edLoginPhone.getText().toString();
                 password = edLoginPassword.getText().toString();
 
                 if(phone.isEmpty() || password.isEmpty()){
+                    progressDialog.dismiss();
                     Toast.makeText(LoginActivity.this, "Vui lòng điền số điện thoại và mật khẩu!", Toast.LENGTH_SHORT).show();
                 }
                 else {
@@ -63,11 +71,17 @@ public class LoginActivity extends AppCompatActivity {
                                         Utils.setRememberUser(LoginActivity.this, true);
                                     }
 
+                                    progressDialog.dismiss();
                                     Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                                 } else {
+                                    progressDialog.dismiss();
                                     Toast.makeText(LoginActivity.this, "Sai mật khẩu!", Toast.LENGTH_SHORT).show();
                                 }
+                            }
+                            else {
+                                progressDialog.dismiss();
+                                Toast.makeText(LoginActivity.this, "Số điện thoại không tồn tại!", Toast.LENGTH_SHORT).show();
                             }
                         }
 
