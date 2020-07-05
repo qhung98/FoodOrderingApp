@@ -25,6 +25,7 @@ import java.util.concurrent.TimeUnit;
 public class PhoneAuthActivity extends AppCompatActivity {
     MaterialEditText edPhone;
     Button btnSendCode;
+    ProgressDialog progressDialog;
 
     PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
     DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("User");
@@ -41,7 +42,6 @@ public class PhoneAuthActivity extends AppCompatActivity {
 
         getSupportActionBar().hide();
 
-//        isRegister = this.getIntent().getBooleanExtra("isRegister", false);
         isRegister = Utils.getActivityState(this, "isRegister");
         isForgotPassword = Utils.getActivityState(this, "isForgotPassword");
 
@@ -49,12 +49,19 @@ public class PhoneAuthActivity extends AppCompatActivity {
         btnSendCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressDialog = new ProgressDialog(PhoneAuthActivity.this);
+                progressDialog.setMessage("Loading...");
+                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                progressDialog.show();
+
                 phone = edPhone.getText().toString();
 
                 if(phone.isEmpty()){
+                    progressDialog.dismiss();
                     Toast.makeText(getBaseContext(), "Số điện thoại không thể bỏ trống!", Toast.LENGTH_SHORT).show();
                 }
                 else if(phone.length()>10 || phone.length()<10){
+                    progressDialog.dismiss();
                     Toast.makeText(getBaseContext(), "Số điện thoại sai định dạng", Toast.LENGTH_SHORT).show();
                 }
                 else {
@@ -65,6 +72,7 @@ public class PhoneAuthActivity extends AppCompatActivity {
                             if(dataSnapshot.child(phone).exists()){
                                 isRegister = Utils.getActivityState(PhoneAuthActivity.this, "isRegister");
                                 if(isRegister){
+                                    progressDialog.dismiss();
                                     Toast.makeText(PhoneAuthActivity.this, "Số điện thoại đã tồn tại!", Toast.LENGTH_SHORT).show();
                                 }
                                 else if (isForgotPassword){
@@ -115,9 +123,7 @@ public class PhoneAuthActivity extends AppCompatActivity {
                     Intent intent = new Intent(PhoneAuthActivity.this, CodeVerifyActivity.class);
                     intent.putExtra("code", s);
                     intent.putExtra("phone", phone);
-                    if(isRegister){
-                        intent.putExtra("isRegister", true);
-                    }
+                    progressDialog.dismiss();
                     startActivity(intent);
             }
         };

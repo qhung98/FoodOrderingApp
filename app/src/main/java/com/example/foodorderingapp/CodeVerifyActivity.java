@@ -3,6 +3,7 @@ package com.example.foodorderingapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -20,6 +21,8 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 public class CodeVerifyActivity extends AppCompatActivity {
     MaterialEditText edCode;
     Button btnVerifyCode;
+    ProgressDialog progressDialog;
+
     String codeSent;
     FirebaseAuth mAuth;
     String phone;
@@ -38,18 +41,25 @@ public class CodeVerifyActivity extends AppCompatActivity {
 
         codeSent = getIntent().getStringExtra("code");
         phone = getIntent().getStringExtra("phone");
-//        isRegister = getIntent().getBooleanExtra("isRegister", false);
+
         isRegister = Utils.getActivityState(this, "isRegister");
 
         btnVerifyCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressDialog = new ProgressDialog(CodeVerifyActivity.this);
+                progressDialog.setMessage("Loading...");
+                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                progressDialog.show();
+
                 String code = edCode.getText().toString();
 
                 if(code.isEmpty()){
+                    progressDialog.dismiss();
                     Toast.makeText(CodeVerifyActivity.this, "Mã xác minh không thể bỏ trống!", Toast.LENGTH_SHORT).show();
                 }
                 else if(code.length()>6 || code.length()<6) {
+                    progressDialog.dismiss();
                     Toast.makeText(CodeVerifyActivity.this, "Mã xác minh sai định dạng!", Toast.LENGTH_SHORT).show();
                 }
                 else {
@@ -70,12 +80,14 @@ public class CodeVerifyActivity extends AppCompatActivity {
                             if(isRegister){
                                 Intent intent = new Intent(CodeVerifyActivity.this, RegisterActivity.class);
                                 intent.putExtra("phone", phone);
+                                progressDialog.dismiss();
                                 startActivity(intent);
                                 finish();
                             }
                             else {
                                 Intent intent = new Intent(CodeVerifyActivity.this, ForgotPasswordActivity.class);
                                 intent.putExtra("phone", phone);
+                                progressDialog.dismiss();
                                 startActivity(intent);
                                 finish();
                             }
