@@ -25,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this, HomeActivity.class));
         }
 
+        Utils.setActivityState(this, "isRegister", false);
+        Utils.setActivityState(this, "isForgotPassword", false);
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

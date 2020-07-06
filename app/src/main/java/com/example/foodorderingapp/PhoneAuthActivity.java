@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -40,10 +41,17 @@ public class PhoneAuthActivity extends AppCompatActivity {
         edPhone = findViewById(R.id.edPhone);
         btnSendCode = findViewById(R.id.btnSendCode);
 
-        getSupportActionBar().hide();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         isRegister = Utils.getActivityState(this, "isRegister");
         isForgotPassword = Utils.getActivityState(this, "isForgotPassword");
+
+        if(isRegister){
+            getSupportActionBar().setTitle("ĐĂNG KÝ");
+        }
+        else {
+            getSupportActionBar().setTitle("QUÊN MẬT KHẨU");
+        }
 
 
         btnSendCode.setOnClickListener(new View.OnClickListener() {
@@ -87,7 +95,7 @@ public class PhoneAuthActivity extends AppCompatActivity {
                                 }
 
                             }
-                            else {
+                            else if(isRegister){
                                 PhoneAuthProvider.getInstance().verifyPhoneNumber(
                                         formatPhone,
                                         60,
@@ -135,5 +143,15 @@ public class PhoneAuthActivity extends AppCompatActivity {
         super.onBackPressed();
         Utils.setActivityState(this, "isRegister", false);
         Utils.setActivityState(this, "isForgotPassword", false);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home){
+            finish();
+        }
+        Utils.setActivityState(this, "isRegister", false);
+        Utils.setActivityState(this, "isForgotPassword", false);
+        return super.onOptionsItemSelected(item);
     }
 }
