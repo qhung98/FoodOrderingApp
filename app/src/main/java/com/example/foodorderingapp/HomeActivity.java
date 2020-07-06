@@ -97,7 +97,7 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
         });
 
         loadListMenu();
-        
+
         FirebaseInstanceId.getInstance().getInstanceId()
                 .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
                     @Override
