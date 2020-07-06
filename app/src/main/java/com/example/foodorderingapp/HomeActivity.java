@@ -24,11 +24,14 @@ import com.example.foodorderingapp.model.Menu;
 import com.example.foodorderingapp.model.User;
 import com.example.foodorderingapp.notification.Token;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import java.util.ArrayList;
 
@@ -94,7 +97,15 @@ public class HomeActivity extends AppCompatActivity  implements NavigationView.O
         });
 
         loadListMenu();
-        updateToken(FirebaseInstanceId.getInstance().getToken());
+        
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        String tokenRefreshed = task.getResult().getToken();
+                        updateToken(tokenRefreshed);
+                    }
+                });
     }
 
     private void loadListMenu() {

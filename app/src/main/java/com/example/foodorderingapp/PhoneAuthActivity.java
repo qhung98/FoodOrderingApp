@@ -71,6 +71,7 @@ public class PhoneAuthActivity extends AppCompatActivity {
                             String formatPhone = "+84" + phone.substring(1);
                             if(dataSnapshot.child(phone).exists()){
                                 isRegister = Utils.getActivityState(PhoneAuthActivity.this, "isRegister");
+                                isForgotPassword = Utils.getActivityState(PhoneAuthActivity.this, "isForgotPassword");
                                 if(isRegister){
                                     progressDialog.dismiss();
                                     Toast.makeText(PhoneAuthActivity.this, "Số điện thoại đã tồn tại!", Toast.LENGTH_SHORT).show();
@@ -129,4 +130,10 @@ public class PhoneAuthActivity extends AppCompatActivity {
         };
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Utils.setActivityState(this, "isRegister", false);
+        Utils.setActivityState(this, "isForgotPassword", false);
+    }
 }
