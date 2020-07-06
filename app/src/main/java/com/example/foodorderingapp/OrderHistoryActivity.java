@@ -10,6 +10,7 @@ import android.view.MenuItem;
 
 import com.example.foodorderingapp.adapter.HistoryAdapter;
 import com.example.foodorderingapp.model.Order;
+import com.example.foodorderingapp.model.User;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,7 +26,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
     HistoryAdapter historyAdapter;
 
     DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Order");
-    String phone = "0987654321";
+    String phone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,9 @@ public class OrderHistoryActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("LỊCH SỬ ĐẶT HÀNG");
+
+        User user = Utils.getCurrentUser(this);
+        phone = user.getPhone();
 
         loadListHOrderHistory();
     }
