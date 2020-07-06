@@ -10,6 +10,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
     Button btnLogin, btnRegister;
+    CartDatabaseHelper db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,12 +18,16 @@ public class MainActivity extends AppCompatActivity {
 
         btnLogin = findViewById(R.id.btnLogin);
         btnRegister = findViewById(R.id.btnRegister);
+        db = new CartDatabaseHelper(this);
 
         getSupportActionBar().hide();
 
         boolean isRemember = Utils.getRememberUser(this);
         if(isRemember){
             startActivity(new Intent(MainActivity.this, HomeActivity.class));
+        }
+        else {
+            db.deleteCart();
         }
 
         Utils.setActivityState(this, "isRegister", false);
