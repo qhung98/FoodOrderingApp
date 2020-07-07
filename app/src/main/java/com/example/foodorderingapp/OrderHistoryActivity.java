@@ -52,8 +52,11 @@ public class OrderHistoryActivity extends AppCompatActivity {
         query1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot snapshot:dataSnapshot.getChildren()){
-                    keys.add(snapshot.getKey());
+                for(DataSnapshot ds:dataSnapshot.getChildren()){
+                    Order order = ds.getValue(Order.class);
+                    if(order.getPhone().equals(phone)){
+                        keys.add(ds.getKey());
+                    }
                 }
             }
 
