@@ -1,6 +1,5 @@
 package com.example.foodorderingapp.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -15,7 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.foodorderingapp.CartActivity;
 import com.example.foodorderingapp.CartDatabaseHelper;
 import com.example.foodorderingapp.FoodActivity;
 import com.example.foodorderingapp.FoodDetailsActivity;
@@ -25,8 +23,6 @@ import com.example.foodorderingapp.SearchActivity;
 import com.example.foodorderingapp.Utils;
 import com.example.foodorderingapp.model.Cart;
 import com.example.foodorderingapp.model.Food;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -37,28 +33,35 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class FoodAdapter extends FirebaseRecyclerAdapter<Food, FoodAdapter.ViewHolder> {
+public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder> {
     Context context;
+    ArrayList<Food> list;
     DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Food");
     CartDatabaseHelper db;
 
-    public FoodAdapter(@NonNull FirebaseRecyclerOptions<Food> options, Context context) {
-        super(options);
+    public SearchAdapter(Context context, ArrayList<Food> list){
         this.context = context;
+        this.list = list;
+    }
+
+    @NonNull
+    @Override
+    public SearchAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_food, parent, false);
+        return new SearchAdapter.ViewHolder(view);
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull final ViewHolder holder, final int position, @NonNull final Food model) {
-        Picasso.get().load(model.getImage()).into(holder.ivFoodImage);
-        holder.tvFoodName.setText(model.getName());
-        holder.tvPrice.setText(Utils.formatPrice(Integer.parseInt(model.getPrice())));
-
+    public void onBindViewHolder(@NonNull SearchAdapter.ViewHolder holder, final int position) {
+        Picasso.get().load(list.get(position).getImage()).into(holder.ivFoodImage);
+        holder.tvFoodName.setText(list.get(position).getName());
+        holder.tvPrice.setText(Utils.formatPrice(Integer.parseInt(list.get(position).getPrice())));
 
         holder.btnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 db = new CartDatabaseHelper(context);
-                String name = model.getName();
+                String name = list.get(position).getName();
 
                 if (db.checkFoodExist(name)){
                     Cart cart = db.getCartByName(name);
@@ -81,7 +84,7 @@ public class FoodAdapter extends FirebaseRecyclerAdapter<Food, FoodAdapter.ViewH
                     Toast.makeText(context, "Cập nhật giỏ hàng thành công!", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    int price = Integer.parseInt(model.getPrice());
+                    int price = Integer.parseInt(list.get(position).getPrice());
                     int quantity = 1;
                     Cart cart = new Cart(name, price, quantity);
                     db.addCart(cart);
@@ -107,14 +110,22 @@ public class FoodAdapter extends FirebaseRecyclerAdapter<Food, FoodAdapter.ViewH
         holder.cardFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dbRef.addValueEventListener(new ValueEventListener() {
+                final String name = list.get(position).getName();
+                Query query = dbRef.orderByKey();
+
+                query.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        String foodId = getSnapshots().getSnapshot(position).getKey();
+                       for(DataSnapshot ds: dataSnapshot.getChildren()){
+                           Food food = ds.getValue(Food.class);
+                           if(food.getName().equals(name)){
+                               String foodId = ds.getKey();
 
-                        Intent intent = new Intent(context, FoodDetailsActivity.class);
-                        intent.putExtra("foodId", foodId);
-                        context.startActivity(intent);
+                               Intent intent = new Intent(context, FoodDetailsActivity.class);
+                               intent.putExtra("foodId", foodId);
+                               context.startActivity(intent);
+                           }
+                       }
                     }
 
                     @Override
@@ -126,11 +137,9 @@ public class FoodAdapter extends FirebaseRecyclerAdapter<Food, FoodAdapter.ViewH
         });
     }
 
-    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_food, parent, false);
-        return new ViewHolder(view);
+    public int getItemCount() {
+        return list.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.andremion.counterfab.CounterFab;
 import com.example.foodorderingapp.adapter.FoodAdapter;
+import com.example.foodorderingapp.adapter.SearchAdapter;
 import com.example.foodorderingapp.model.Food;
 import com.example.foodorderingapp.model.Menu;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -91,8 +92,8 @@ public class SearchActivity extends AppCompatActivity {
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         list.add(ds.getValue(Food.class));
                     }
-                    FoodAdapter foodAdapter = new FoodAdapter(SearchActivity.this, list);
-                    listSearch.setAdapter(foodAdapter);
+                    SearchAdapter searchAdapter = new SearchAdapter(SearchActivity.this, list);
+                    listSearch.setAdapter(searchAdapter);
                 }
             }
 
@@ -107,12 +108,12 @@ public class SearchActivity extends AppCompatActivity {
         ArrayList<Food> filterList = new ArrayList<>();
         for(Food food:list){
             if(food.getName().toLowerCase().contains(newText.toLowerCase())){
-               filterList.add(food);
+                filterList.add(food);
             }
         }
 
-        FoodAdapter foodAdapter = new FoodAdapter(this, filterList);
-        listSearch.setAdapter(foodAdapter);
+        SearchAdapter searchAdapter = new SearchAdapter(this, filterList);
+        listSearch.setAdapter(searchAdapter);
     }
 
     @Override

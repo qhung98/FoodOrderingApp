@@ -53,9 +53,6 @@ public class FoodActivity extends AppCompatActivity implements NetworkReceiver.R
 
         db = new CartDatabaseHelper(this);
 
-        listFood.setHasFixedSize(true);
-        listFood.setLayoutManager(new LinearLayoutManager(this));
-
         fab.setCount(db.getCartCount());
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -74,23 +71,19 @@ public class FoodActivity extends AppCompatActivity implements NetworkReceiver.R
 
     private void loadListFood() {
         Query query = dbRef.orderByChild("menuId").equalTo(menuId);
-        query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                        list.add(ds.getValue(Food.class));
-                    }
-                    foodAdapter = new FoodAdapter(FoodActivity.this, list);
-                    listFood.setAdapter(foodAdapter);
-                }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+        FirebaseRecyclerOptions<Food> options = new FirebaseRecyclerOptions.Builder<Food>().setQuery(query, Food.class).build();
+        foodAdapter = new FoodAdapter(options, this);
 
-            }
-        });
+        listFood.setHasFixedSize(true);
+        listFood.setLayoutManager(new LinearLayoutManager(this));
+        listFood.setAdapter(foodAdapter);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        foodAdapter.startListening();
     }
 
     @Override
@@ -107,6 +100,12 @@ public class FoodActivity extends AppCompatActivity implements NetworkReceiver.R
     protected void onPause() {
         super.onPause();
         unregisterReceiver(receiver);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        foodAdapter.stopListening();
     }
 
     @Override
